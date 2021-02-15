@@ -8,7 +8,7 @@ import { Model } from "./repository.model";
 })
 export class ProductComponent {
     model: Model = new Model();
-    selectedProduct: string;
+    selectedProduct: Product;
 
     constructor(ref: ApplicationRef) {
         (<any>window).appRef = ref;
