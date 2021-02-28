@@ -11,7 +11,8 @@ import { Model } from "./repository.model";
 })
 export class ProductComponent {
     model: Model = new Model();
-    //formGroup: ProductFormGroup = new ProductFormGroup();
+    // formGroup: ProductFormGroup = new ProductFormGroup();
+    showTable: boolean = false;
 
     getProduct(key: number): Product {
         return this.model.getProduct(key);
