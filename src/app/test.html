@@ -1,0 +1,14 @@
+<ng-container [ngSwitch]="activeLayout">
+    <ng-container *ngSwitchCase="repair">
+        <app-repair [functionTypeCode]="functionTypeCode"></app-repair>
+    </ng-container>
+    <ng-container *ngSwitchCase="confirm">
+        <app-confirm [actionSelected]="actionSelected" [functionTypeCode]="functionTypeCode">
+        </app-confirm>
+    </ng-container>
+</ng-container>
+<ng-container [ngSwitch]="activeLayout">
+    <ng-container *ngSwitchCase="repair">
+        <button class="btn btn-sm btn-outline-secondary" style="height: 34px" type="button">Next</button>
+    </ng-container>
+</ng-container>
