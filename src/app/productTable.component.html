@@ -1,17 +1,56 @@
-<table class="tbale table-sm table-bordered table-striped">
+<div>
+    <label>Tax Rate:</label>
+    <select [value]="taxRate || 0" 
+        (change)="taxRate=$event.target.value">
+        <option value="0">None</option>
+        <option value="10">{{0.1 | percent}}</option>
+        <option value="10">{{0.2 | percent}}</option>
+        <option value="10">{{0.5 | percent}}</option>
+        <option value="10">{{1.5 | percent}}</option>
+    </select>
+</div>
+<div>
+    <label>Category Filter:</label>
+    <select [(ngModel)]="categoryFilter">
+        <option>Watersports</option>
+        <option>Soccer</option>
+        <option>Chess</option>
+    </select>
+</div>
+<div class="bg-info p-2 text-white">
+    <div>Date formatted from as shortDate: {{ dateObject | date:"shortDate"}}</div>
+    <div>Date formatted from as mediumDate: {{ dateObject | date:"mediumDate"}}</div>
+    <div>Date formatted from as longDate: {{ dateObject | date: "longDate"}}</div>
+</div>
+<div class="bg-info p-2 text-white">
+    <div>{{getProducts() | json}}</div>
+</div>
+<div>
+    <label>Number of items:</label>
+    <select [value]="itemCount || 1" (change)="itemCount=$event.target.value">
+        <option *ngFor="let item of getProducts(); let i = index" 
+            [value]="i+1" [selected]="(i+1)===itemCount">
+            {{i+1}}
+        </option>
+    </select>
+</div>
+<table class="table table-sm table-bordered table-striped">
     <tr>
         <th>Name</th>
         <th>Category</th>
         <th>Price</th>
         <th></th>
     </tr>
-    <tr *paFor="let item of getProducts(); let i = index; 
-        let odd =odd;let even=even" [class.bg-info]="odd" 
-        [class.bg-warning]="even">
+    <tr *paFor="let item of getProducts() | slice:0:(itemCount || 1); 
+        let i = index; let odd =odd;let even=even" 
+        [class.bg-info]="odd" [class.bg-warning]="even">
         <td style="vertical-align: middle;">{{i+1}}</td>
-        <td style="vertical-align: middle;">{{item.name}}</td>
-        <td style="vertical-align: middle;">{{item.category}}</td>
-        <td style="vertical-align: middle;">{{item.price}}</td>
+        <td style="vertical-align: middle;">{{item.name | titlecase }}</td>
+        <td style="vertical-align: middle;">{{item.category | lowercase}}</td>
+        <td style="vertical-align: middle;">
+            {{item.price | addTax:(taxRate || 0) | 
+                currency:"USD":"symbol":"2.2-2" }}
+        </td>
         <td class="text-xs-center">
             <button class="btn btn-danger btn-sm" (click)="deleteProduct(item.id)">
                 Delete
