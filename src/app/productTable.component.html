@@ -36,11 +36,18 @@
 </div>
 <table class="table table-sm table-bordered table-striped">
     <tr>
-        <th>Key</th>
-        <th>Value</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Message</th>
     </tr>
-    <tr *paFor="let item of getProducts() | keyvalue">
-        <td> {{item.key}}</td>
-        <td> {{item.value | json}}</td>
+    <tr *paFor="let item of getProducts()">
+        <td> {{item.name}}</td>
+        <td> {{item.category}}</td>
+        <td>Helps you {{item.category | il8nSelect:selectMap}}</td>
     </tr>
 </table>
+<div class="bg-info text-white p-2">
+    <div>There are {{1 | i18nPlural:numberMap}}</div>
+    <div>There are {{2 | i18nPlural:numberMap}}</div>
+    <div>There are {{100 | i18nPlural:numberMap}}</div>
+</div>

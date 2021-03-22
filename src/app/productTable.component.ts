@@ -37,4 +37,10 @@ export class ProductTableComponent {
         "Soccer": "soccer goals",
         "other": "have fun"
     }
+
+    numberMap = {
+        "=1": "one product",
+        "=2": "two products",
+        "other": "# products"
+    }
 }
